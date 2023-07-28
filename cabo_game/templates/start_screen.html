@@ -1,0 +1,47 @@
+<!-- templates/start_screen.html (updated) -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cabo Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to Cabo Game!</h1>
+    <div class="container">
+        {% if players %}
+            {% for player_hand in players %}
+                <div class="player">
+                    <h2>Player {{ loop.index }}</h2>
+                    <div class="hand" id="player_hand_{{ loop.index }}">
+                        {% for card in player_hand %}
+                            <div class="card">{{ card }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <button id="startGameBtn">Start Game</button>
+    <script>
+        document.getElementById('startGameBtn').addEventListener('click', function() {
+            fetch('/deal', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    for (let i = 0; i < 1; i++) {
+                        console.log(i)
+                        let hand = data[i];
+                        let playerHand = document.getElementById('player_hand_' + (i + 1));
+                        playerHand.innerHTML = '';
+                        for (let j = 0; j < hand.length; j++) {
+                            let cardDiv = document.createElement('div');
+                            cardDiv.classList.add('card');
+                            cardDiv.innerText = hand[j];
+                            playerHand.appendChild(cardDiv);
+                        }
+                    }
+                });
+        });
+    </script>
+</body>
+</html>

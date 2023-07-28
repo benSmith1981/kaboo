@@ -1,0 +1,33 @@
+/* static/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.player {
+    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.card {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card.selected {
+    background-color: #ffc107;
+}
